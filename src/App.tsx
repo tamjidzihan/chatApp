@@ -9,12 +9,10 @@ import SignIn from './components/SignIn';
 
 function App() {
   const [user] = useAuthState(auth)
-  console.log(user)
 
   return (
     <>
       {user ? <ChatRoom /> : <SignIn />}
-
     </>
   )
 }
