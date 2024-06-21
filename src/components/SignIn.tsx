@@ -1,14 +1,14 @@
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { auth } from '../database/database';
+import useDatabase from '../database/database';
 
 
 const SignIn = () => {
+    const { user, auth } = useDatabase()
 
     const signInWithGoogle = () => {
         const provider = new GoogleAuthProvider();
         signInWithPopup(auth, provider)
     }
-
 
     return (
         <>

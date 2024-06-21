@@ -1,9 +1,9 @@
 import { signOut } from 'firebase/auth';
-import { auth } from '../database/database';
+import useDatabase from '../database/database';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 const Signout = () => {
-    const [user] = useAuthState(auth)
+    const { user, auth } = useDatabase()
 
     const handleSignOut = () => {
         signOut(auth)
