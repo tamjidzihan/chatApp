@@ -4,9 +4,13 @@ import ChatMessage from './ChatMessage'
 import { useEffect, useState } from 'react'
 
 
-type DataItem = {
+interface DataItem {
     id: string;
-    [key: string]: any; // Adjust this to match the structure of your document data
+    text: string;
+    createdAt: {
+        seconds: number;
+        nanoseconds: number;
+    };
 };
 
 const ChatRoom = () => {
@@ -24,12 +28,13 @@ const ChatRoom = () => {
         getData();
     }, [user, fetchData]);
 
+
     return (
         <>
             <p>Chat Room</p>
             <p className=' lead'>{user?.displayName}</p>
             <div>
-                {data.map(item => <p key={item.id}> {item.text}</p>)}
+                {data && data.map(item => <ChatMessage key={item.id} message={item.text} />)}
                 {/* {messages && messages.map(msg => <ChatMessage key={msg.createdAt} message={msg} />)} */}
             </div>
             <Signout />

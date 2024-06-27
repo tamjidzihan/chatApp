@@ -1,13 +1,13 @@
 
 interface ChatMessageProps {
-    message: any;
+    message: string;
 }
 
 const ChatMessage = ({ message }: ChatMessageProps) => {
     return (
         <>
-            <p>{message.text}</p>
-            <small>{message.createdAt?.toDate().toString()}</small>
+            <p> {message}</p>
+
         </>
     )
 }
