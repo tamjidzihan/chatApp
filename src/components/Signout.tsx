@@ -1,5 +1,5 @@
 import { signOut } from 'firebase/auth';
-import useDatabase from '../database/database';
+import useDatabase from '../database/usedatabase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 const Signout = () => {

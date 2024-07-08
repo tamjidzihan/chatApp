@@ -1,12 +1,22 @@
 
 interface ChatMessageProps {
-    message: string;
+    id: string;
+    text: string;
+    createdAt: {
+        seconds: number;
+        nanoseconds: number;
+    };
+
 }
 
-const ChatMessage = ({ message }: ChatMessageProps) => {
+const ChatMessage = ({ id, text, createdAt }: ChatMessageProps) => {
     return (
         <>
-            <p> {message}</p>
+            <div className=" ">
+                <p>ID: {id}</p>
+                <p>Message: {text}</p>
+                <p className=" lead">{createdAt.seconds} {createdAt.nanoseconds}</p>
+            </div>
 
         </>
     )

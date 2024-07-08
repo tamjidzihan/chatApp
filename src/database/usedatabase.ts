@@ -1,14 +1,8 @@
 import { initializeApp } from 'firebase/app';
-import { collection, getDocs, getFirestore, query } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useCallback } from 'react';
 
-
-interface DataType {
-    id: string;
-    [key: string]: any;
-};
 
 const useDatabase = () => {
     const app = initializeApp({
@@ -24,21 +18,7 @@ const useDatabase = () => {
     const auth = getAuth(app)
     const firestore = getFirestore(app)
     const [user] = useAuthState(auth)
-
-
-
-    const fetchData = useCallback(async (collectionName: string, queryParam: any) => {
-        const dataCollection = collection(firestore, collectionName);
-        const dataQuery = query(dataCollection, queryParam);
-        const querySnapshot = await getDocs(dataQuery);
-        const dataList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) as DataType[];
-        return dataList;
-    }, [firestore]);
-
-
-
-
-    return { auth, firestore, user, fetchData }
+    return { auth, firestore, user }
 }
 
 export default useDatabase
