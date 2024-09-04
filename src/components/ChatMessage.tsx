@@ -1,4 +1,3 @@
-
 interface ChatMessageProps {
     id: string;
     text: string;

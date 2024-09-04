@@ -11,9 +11,6 @@ const ChatRoom = () => {
     const { user } = useDatabase()
     const { data, loading, error } = useFetchData('messages');
 
-
-
-
     return (
         <>
             <div className=' container mt-5'>
@@ -21,12 +18,12 @@ const ChatRoom = () => {
                 <p className=' lead'>{user?.displayName}</p>
                 <div>
                     {data && data.map(item =>
-                        <ChatMessage key={item.id} text={item.text} id={item.id} createdAt={item.createdAt} />
+                        < ChatMessage key={item.id} text={item.text} id={item.id} createdAt={item.createdAt} />
                     )}
                     {/* {messages && messages.map(msg => <ChatMessage key={msg.createdAt} message={msg} />)} */}
                 </div>
                 <Signout />
-            </div>
+            </div >
 
         </>
     )

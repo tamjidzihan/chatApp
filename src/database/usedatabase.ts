@@ -16,9 +16,9 @@ const useDatabase = () => {
     });
 
     const auth = getAuth(app)
-    const firestore = getFirestore(app)
+    const firestoreDB = getFirestore(app)
     const [user] = useAuthState(auth)
-    return { auth, firestore, user }
+    return { auth, firestoreDB, user }
 }
 
 export default useDatabase

@@ -13,31 +13,34 @@ interface DataItem {
 }
 
 const useFetchData = (collectionName: string) => {
-    const { firestore } = useDatabase();
+    const { firestoreDB } = useDatabase();
     const [data, setData] = useState<DataItem[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        const q = query(collection(firestore, collectionName), orderBy('createdAt'));
-        const unsubscribe = onSnapshot(
-            q,
+        // const querySet = query(collection(firestoreDB, 'messages'), orderBy('createdAt'));
+        const querySet = query(collection(firestoreDB, 'messages'));
+        console.log(firestoreDB);
+
+        const snapshot = onSnapshot(querySet,
             (snapshot) => {
-                const fetchedData: DataItem[] = snapshot.docs.map((doc) => ({
-                    id: doc.id,
-                    ...doc.data()
-                })) as DataItem[];
-                setData(fetchedData);
-                setLoading(false);
+                // const fetchedData: DataItem[] = snapshot.docs.map((doc) => ({
+                //     id: doc.id,
+                //     ...doc.data()
+                // })) as DataItem[];
+                // setData(fetchedData);
+                // setLoading(false);
+                console.log(snapshot.docs);
+
             },
             (err) => {
                 setError(err.message);
                 setLoading(false);
             }
         );
-
-        return () => unsubscribe();
-    }, [firestore, collectionName]);
+        return () => snapshot();
+    }, [firestoreDB, collectionName]);
 
     return { data, loading, error };
 }
